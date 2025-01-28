@@ -3,33 +3,44 @@ const btnVoltar = document.getElementById("btn-voltar");
 const cartoes = document.querySelectorAll(".cartao");
 let cartaoAtual = 0;
 
+cartoes.forEach(cartao => {
+  cartao.addEventListener("click", function() {
+    const cartaVirada = cartao.querySelector(".carta-virada");
+
+    // virar o cartão
+    cartao.classList.toggle("virar");
+    // mostrar o fundo da carta
+    cartaVirada.classList.toggle("mostrar-fundo-carta");
+
+    const descricao = cartao.querySelector(".descricao");
+    descricao.classList.toggle("esconder");
+  });
+});
+
 btnAvancar.addEventListener("click", function () {
-    if (cartaoAtual === cartoes.length - 1) return;
+  if (cartaoAtual === cartoes.length - 1) return;
 
-    esconderCartaoSelecionado();
+  esconderCartaoSelecionado();
 
-    cartaoAtual++;
-    monstarCartão(cartaoAtual);
+  cartaoAtual++;
+  mostrarCartao(cartaoAtual);
 });
 
 btnVoltar.addEventListener("click", function () {
+  if (cartaoAtual === 0) return;
 
-    if (cartaoAtual === 0) return;
+  esconderCartaoSelecionado();
 
-
-    esconderCartaoSelecionado();
-
-
-    cartaoAtual--;
-    monstarCartão(cartaoAtual);
+  cartaoAtual--;
+  mostrarCartao(cartaoAtual);
 });
 
-function monstarCartão(cartaoAtual) {
-    cartoes[cartaoAtual].classList.add("selecionado");
+function mostrarCartao(cartaoAtual) {
+  cartoes[cartaoAtual].classList.add("selecionado");
 }
 
 function esconderCartaoSelecionado() {
-    const cartaoSelecionado = document.querySelector(".selecionado");
-    cartaoSelecionado.classList.remove("selecionado");
+  const cartaoSelecionado = document.querySelector(".selecionado");
+  cartaoSelecionado.classList.remove("selecionado");
 }
 
